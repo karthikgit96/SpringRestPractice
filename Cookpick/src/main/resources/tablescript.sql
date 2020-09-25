@@ -1,0 +1,16 @@
+DROP SEQUENCE PRODUCT_SEQUENCE;
+CREATE SEQUENCE PRODUCT_SEQUENCE START WITH 1000 INCREMENT BY 1;
+
+DROP TABLE PRODUCT;
+
+CREATE TABLE PRODUCT(
+	product_id NUMBER PRIMARY KEY,
+	product_name VARCHAR2(20) NOT NULL,
+	product_vendor VARCHAR2(20) NOT NULL,
+	product_price NUMBER(6,2) NOT NULL,
+	product_in_stock CHAR(1) CHECK(product_in_stock in ('y','Y','N','n'))
+);
+
+
+
+select * from PRODUCT;
