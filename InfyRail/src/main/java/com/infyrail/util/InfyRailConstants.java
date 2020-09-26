@@ -2,6 +2,7 @@ package com.infyrail.util;
 
 public enum InfyRailConstants {
 	ROUTE_NOT_FOUND("route.not.found"),
+	ROUTE_ALREADY_PRESENT("route.already.present"),
 	GENERAL_EXCEPTION_MESSAGE("general.exception");
 	
 	private final String type;
