@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.infyrail.dto.RouteDTO;
@@ -23,8 +24,8 @@ public class RouteEntity {
 	private Integer id;
 	private String source;
 	private String destination;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "route_id")
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "trains_on_routes",joinColumns = @JoinColumn(name = "route_id"),inverseJoinColumns = @JoinColumn(name = "train_id"))
 	private List<TrainEntity> trainList;
 	public Integer getId() {
 		return id;
