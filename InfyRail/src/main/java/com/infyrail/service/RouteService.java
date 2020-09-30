@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.infyrail.dto.NoSuchRouteException;
 import com.infyrail.dto.RouteAlreadyPresentException;
 import com.infyrail.dto.RouteDTO;
+import com.infyrail.dto.TrainDTO;
 import com.infyrail.entity.RouteEntity;
 import com.infyrail.repository.RouteRepository;
 import com.infyrail.util.InfyRailConstants;
@@ -39,6 +40,17 @@ public class RouteService {
 			retVal = route.getId();
 		}
 		return retVal;	
+	}
+	
+	//Method to show Train List based on source and destination
+	public List<TrainDTO> getTrains(String source , String destination) throws NoSuchRouteException{
+		List<RouteEntity> routeEntities = routeRepository.findAll();
+		RouteDTO route = null;
+		for(RouteEntity c: routeEntities) {
+			if(c.getSource()==source && c.getDestination()==destination) route = c.convertToRouteDTO();
+		}
+		if(route == null) throw new NoSuchRouteException(InfyRailConstants.ROUTE_NOT_FOUND.toString());
+		return route.getTrains();
 	}
 
 }
