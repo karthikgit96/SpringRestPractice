@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.infyrail.dto.NoSuchRouteException;
+import com.infyrail.dto.RouteAlreadyPresentException;
 import com.infyrail.dto.RouteDTO;
 import com.infyrail.entity.RouteEntity;
 import com.infyrail.repository.RouteRepository;
@@ -28,11 +29,11 @@ public class RouteService {
 	}
 	
 	//Method to create route
-	public Integer createRoute(RouteDTO routeDTO) throws Exception{
+	public Integer createRoute(RouteDTO routeDTO) throws RouteAlreadyPresentException{
 		Integer retVal = null;
 		RouteEntity route = routeDTO.convertToEntity();
 		List<RouteEntity> existingList = routeRepository.findAll();
-		if(existingList.contains(route)) throw new Exception(InfyRailConstants.ROUTE_ALREADY_PRESENT.toString());
+		if(existingList.contains(route)) throw new RouteAlreadyPresentException(InfyRailConstants.ROUTE_ALREADY_PRESENT.toString());
 		else {
 			routeRepository.saveAndFlush(route);
 			retVal = route.getId();
