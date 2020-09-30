@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.infyrail.dto.TrainDTO;
+
 @Entity
 @Table(name = "trains")
 public class TrainEntity {
@@ -57,6 +59,10 @@ public class TrainEntity {
 		this.arrivalTime = arrivalTime;
 		this.departureTime = departureTime;
 		this.fare = fare;
+	}
+	
+	public TrainDTO convertToDTO() {
+		return new TrainDTO(this.id,this.trainName,this.arrivalTime,this.departureTime,this.fare);
 	}
 	
 	
