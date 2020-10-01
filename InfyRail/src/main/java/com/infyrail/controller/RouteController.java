@@ -48,8 +48,14 @@ public class RouteController {
 	
 	@GetMapping(value = "trains")
 	public ResponseEntity<List<TrainDTO>> getTrains(@RequestParam String source, @RequestParam String destination) throws NoSuchRouteException{
-		List<TrainDTO> trains = routeService.getTrains(source, destination);
+		List<TrainDTO> trains = routeService.getTrains(source.trim(), destination.trim());
 		return new ResponseEntity<List<TrainDTO>>(trains,HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<RouteDTO>> showAllRoutes(){
+		List<RouteDTO> routes = routeService.showRoutes();
+		return new ResponseEntity<List<RouteDTO>>(routes,HttpStatus.OK);
 	}
 
 }

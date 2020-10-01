@@ -54,6 +54,6 @@ public class TrainDTO {
 	}
 	
 	public TrainEntity convertToEntity() {
-		return new TrainEntity(this.arrivalTime,this.departureTime,this.trainName,this.fare);
+		return new TrainEntity(this.trainName,this.arrivalTime,this.departureTime,this.fare);
 	}
 }

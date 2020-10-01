@@ -64,6 +64,31 @@ public class TrainEntity {
 	public TrainDTO convertToDTO() {
 		return new TrainDTO(this.id,this.trainName,this.arrivalTime,this.departureTime,this.fare);
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((trainName == null) ? 0 : trainName.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TrainEntity other = (TrainEntity) obj;
+		if (trainName == null) {
+			if (other.trainName != null)
+				return false;
+		} else if (!trainName.equals(other.trainName))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 

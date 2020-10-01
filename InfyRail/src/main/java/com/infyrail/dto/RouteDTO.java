@@ -60,7 +60,7 @@ public class RouteDTO {
 			TrainEntity t = c.convertToEntity();
 			trainentities.add(t);
 		});
-		return new RouteEntity(this.destination,this.source,trainentities);
+		return new RouteEntity(this.source,this.destination,trainentities);
 	}
 	@Override
 	public int hashCode() {
