@@ -68,7 +68,7 @@ public class RouteEntity {
 			TrainDTO t = new TrainDTO(c.getId(),c.getTrainName(),c.getArrivalTime(),c.getDepartureTime(),c.getFare());
 			trainList.add(t);
 		});		
-		return new RouteDTO(this.id,this.destination,this.source,trainList);
+		return new RouteDTO(this.id,this.source,this.destination,trainList);
 		
 	}
 	@Override
