@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.infyrail.dto.ErrorMessage;
 import com.infyrail.dto.NoSuchRouteException;
+import com.infyrail.dto.NoSuchTrainException;
 import com.infyrail.dto.RouteAlreadyPresentException;
+import com.infyrail.dto.TrainAlreadyExistsException;
 import com.infyrail.util.InfyRailConstants;
 
 @RestControllerAdvice
@@ -36,6 +38,18 @@ public class ExceptionControllerAdvice {
 	
 	@ExceptionHandler(NoSuchRouteException.class)
 	public ResponseEntity<ErrorMessage> exceptionHandler(NoSuchRouteException ex){
+		ErrorMessage error = new ErrorMessage(HttpStatus.BAD_REQUEST.value(),env.getProperty(ex.getMessage()));
+		return new ResponseEntity<ErrorMessage>(error,HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(TrainAlreadyExistsException.class)
+	public ResponseEntity<ErrorMessage> exceptionHandler(TrainAlreadyExistsException ex){
+		ErrorMessage error = new ErrorMessage(HttpStatus.BAD_REQUEST.value(),env.getProperty(ex.getMessage()));
+		return new ResponseEntity<ErrorMessage>(error,HttpStatus.BAD_REQUEST);		
+	}
+	
+	@ExceptionHandler(NoSuchTrainException.class)
+	public ResponseEntity<ErrorMessage> exceptionHandler(NoSuchTrainException ex){
 		ErrorMessage error = new ErrorMessage(HttpStatus.BAD_REQUEST.value(),env.getProperty(ex.getMessage()));
 		return new ResponseEntity<ErrorMessage>(error,HttpStatus.BAD_REQUEST);
 	}
