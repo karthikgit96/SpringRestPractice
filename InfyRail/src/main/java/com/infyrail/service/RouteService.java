@@ -77,12 +77,22 @@ public class RouteService {
 		entities.forEach(c->{
 			System.out.println(c.getSource()+" "+c.getDestination());
 			if(c.getSource().equalsIgnoreCase(source)&&c.getDestination().equalsIgnoreCase(destination)) {
-				System.out.println("found a match!!");
 				RouteDTO route = c.convertToRouteDTO();
 				trains.addAll(route.getTrains());
 			}
 		});
 		return trains;
+	}
+	
+	public String updateRoute(Integer routeId, RouteDTO routeDTO) throws NoSuchRouteException{
+		String message = null;
+		Optional<RouteEntity> optional = routeRepository.findById(routeId);
+		RouteEntity routeEntity = optional.orElseThrow(()-> new NoSuchRouteException(InfyRailConstants.ROUTE_NOT_FOUND.toString()));
+		routeEntity.setSource(routeDTO.getSource());
+		routeEntity.setDestination(routeDTO.getDestination());
+		routeRepository.saveAndFlush(routeEntity);
+		message = InfyRailConstants.ROUTE_UPDATE_SUCCESS.toString();
+		return message;
 	}
 
 }
