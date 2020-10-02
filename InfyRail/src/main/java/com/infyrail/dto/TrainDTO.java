@@ -1,12 +1,21 @@
 package com.infyrail.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.infyrail.entity.TrainEntity;
 
 public class TrainDTO {
 	private Integer id;
+	@NotNull(message = "{train.name.notnull}")
 	private String trainName;
+	@NotNull(message = "{train.arrivaltime.notnull}")
+	@Pattern(regexp = "[0-1]{2}:[0-9]{2}:[0-9]{2} (AM|PM)",message = "{train.time.invalid}")
 	private String arrivalTime;
+	@NotNull(message = "{train.departuretime.notnull}")
+	@Pattern(regexp = "[0-1]{2}:[0-9]{2}:[0-9]{2} (AM|PM)",message = "{train.time.invalid}")
 	private String departureTime;
+	@NotNull(message = "{train.fare.notnull}")
 	private Double fare;
 	
 	public Integer getId() {
