@@ -18,7 +18,7 @@ import com.infyrail.repository.RouteRepository;
 import com.infyrail.repository.TrainRepository;
 import com.infyrail.util.InfyRailConstants;
 
-@Service
+@Service(value = "routeService")
 @Transactional
 public class RouteService {
 	@Autowired
